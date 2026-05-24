@@ -5,17 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로또 번호 생성기</title>
     <link rel="stylesheet" href="style.css">
-</head> 
+</head>
 <body>
-    <div class="container">
-        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">
-            <span class="theme-toggle__icon" aria-hidden="true">☾</span>
-            <span class="theme-toggle__text">다크 모드</span>
-        </button>
-        <h1>로또 번호 생성기</h1>
-        <div id="numbers" class="numbers-container"></div>
-        <button id="generate-btn">번호 생성</button>
-    </div>
+    <main class="app-shell">
+        <header class="app-header">
+            <div>
+                <p class="eyebrow">6/45 Quick Pick</p>
+                <h1>로또 번호 생성기</h1>
+            </div>
+            <button id="theme-toggle" class="theme-toggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">
+                <span class="theme-toggle__icon" aria-hidden="true">☾</span>
+                <span class="theme-toggle__text">다크</span>
+            </button>
+        </header>
+
+        <section class="hero-panel" aria-labelledby="current-title">
+            <div class="panel-head">
+                <div>
+                    <p class="section-label">이번 조합</p>
+                    <h2 id="current-title">오늘의 추천 번호</h2>
+                </div>
+                <span id="draw-time" class="draw-time">아직 생성 전</span>
+            </div>
+            <div id="numbers" class="numbers-container" aria-live="polite"></div>
+            <div class="action-row">
+                <button id="generate-btn" class="primary-button" type="button">번호 생성</button>
+                <button id="clear-history-btn" class="secondary-button" type="button">최근 기록 삭제</button>
+            </div>
+        </section>
+
+        <section class="content-grid">
+            <article class="panel stats-panel" aria-labelledby="stats-title">
+                <div class="panel-head compact">
+                    <div>
+                        <p class="section-label">통계</p>
+                        <h2 id="stats-title">확률과 분포</h2>
+                    </div>
+                </div>
+                <dl class="odds-list">
+                    <div>
+                        <dt>1등 확률</dt>
+                        <dd>1 / 8,145,060</dd>
+                    </div>
+                    <div>
+                        <dt>확률(%)</dt>
+                        <dd>0.0000123%</dd>
+                    </div>
+                    <div>
+                        <dt>현재 합계</dt>
+                        <dd id="sum-stat">-</dd>
+                    </div>
+                    <div>
+                        <dt>홀짝</dt>
+                        <dd id="odd-even-stat">-</dd>
+                    </div>
+                </dl>
+                <div class="range-stats" id="range-stats" aria-label="번호 구간 통계"></div>
+            </article>
+
+            <article class="panel history-panel" aria-labelledby="history-title">
+                <div class="panel-head compact">
+                    <div>
+                        <p class="section-label">저장</p>
+                        <h2 id="history-title">최근 생성 번호</h2>
+                    </div>
+                    <span id="history-count" class="history-count">0개</span>
+                </div>
+                <div id="history-list" class="history-list"></div>
+            </article>
+        </section>
+    </main>
     <script src="main.js"></script>
 </body>
 </html>
