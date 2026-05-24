@@ -1,31 +1,26 @@
-const backBtn = document.getElementById('back');
-const forwardBtn = document.getElementById('forward');
-const refreshBtn = document.getElementById('refresh');
-const addressBar = document.getElementById('address-bar');
-const contentFrame = document.getElementById('content-frame');
+const generateBtn = document.getElementById('generate-btn');
+const numbersContainer = document.getElementById('numbers');
 
-backBtn.addEventListener('click', () => {
-    contentFrame.contentWindow.history.back();
+generateBtn.addEventListener('click', () => {
+    const numbers = generateLottoNumbers();
+    displayNumbers(numbers);
 });
 
-forwardBtn.addEventListener('click', () => {
-    contentFrame.contentWindow.history.forward();
-});
-
-refreshBtn.addEventListener('click', () => {
-    contentFrame.contentWindow.location.reload();
-});
-
-addressBar.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        let url = addressBar.value;
-        if (!url.startsWith('http')) {
-            url = 'https://' + url;
-        }
-        contentFrame.src = url;
+function generateLottoNumbers() {
+    const numbers = new Set();
+    while (numbers.size < 6) {
+        const randomNumber = Math.floor(Math.random() * 45) + 1;
+        numbers.add(randomNumber);
     }
-});
+    return Array.from(numbers).sort((a, b) => a - b);
+}
 
-contentFrame.addEventListener('load', () => {
-    addressBar.value = contentFrame.contentWindow.location.href;
-});
+function displayNumbers(numbers) {
+    numbersContainer.innerHTML = '';
+    numbers.forEach(number => {
+        const numberElement = document.createElement('div');
+        numberElement.classList.add('number');
+        numberElement.textContent = number;
+        numbersContainer.appendChild(numberElement);
+    });
+}
